@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>{% if page.title %}{{ page.title }} · {{ site.title }}{% else %}{{ site.title }}{% endif %}</title>
+  <meta name="description" content="{{ page.description | default: site.description }}" />
+  <link rel="stylesheet" href="{{ '/assets/css/landing.css' | relative_url }}" />
+  <script defer src="{{ '/assets/js/site.js' | relative_url }}"></script>
+    <!-- Favicons -->
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ '/assets/favicons/favicon-16.png' | relative_url }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ '/assets/favicons/favicon-32.png' | relative_url }}">
+    <link rel="icon" type="image/png" sizes="64x64" href="{{ '/assets/favicons/favicon-64.png' | relative_url }}">
+    <link rel="icon" type="image/png" sizes="128x128" href="{{ '/assets/favicons/favicon-128.png' | relative_url }}">
+    <link rel="icon" type="image/png" sizes="256x256" href="{{ '/assets/favicons/favicon-256.png' | relative_url }}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ '/assets/favicons/favicon-180.png' | relative_url }}">
+    <link rel="icon" type="image/png" sizes="192x192" href="{{ '/assets/favicons/favicon-192.png' | relative_url }}">
+    <link rel="icon" type="image/png" sizes="512x512" href="{{ '/assets/favicons/favicon-512.png' | relative_url }}">
+  {% include meta-open-graph.html %}
+</head>
+<body>
+  {% include header.html %}
+  {{ content }}
+  {% include footer.html %}
+</body>
+</html>
