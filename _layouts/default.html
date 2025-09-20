@@ -6,6 +6,9 @@
   <title>{% if page.title %}{{ page.title }} · {{ site.title }}{% else %}{{ site.title }}{% endif %}</title>
   <meta name="description" content="{{ page.description | default: site.description }}" />
   <link rel="stylesheet" href="{{ '/assets/css/landing.css' | relative_url }}" />
+  {% if page.css %}
+    <link rel="stylesheet" href="{{ page.css | relative_url }}" />
+  {% endif %}
   <script defer src="{{ '/assets/js/site.js' | relative_url }}"></script>
     <!-- Favicons -->
     <link rel="icon" type="image/png" sizes="16x16" href="{{ '/assets/favicons/favicon-16.png' | relative_url }}">
