@@ -1,7 +1,18 @@
 ---
 permalink: /404.html
-layout: page
+layout: default
 ---
+
+<script>
+  (function () {
+    var path = window.location.pathname || "";
+    if (path === "/install/" || path === "/install") return;
+    if (path.indexOf("/app/") === 0 || path === "/app") {
+      var from = path + (window.location.search || "") + (window.location.hash || "");
+      window.location.replace("/install/?from=" + encodeURIComponent(from));
+    }
+  })();
+</script>
 
 <style type="text/css" media="screen">
   .container {
