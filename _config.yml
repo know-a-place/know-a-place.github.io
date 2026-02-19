@@ -23,9 +23,15 @@ email: hi@iknowaplace.app
 description: >- # this means to ignore newlines until "baseurl:"
   Find your next co-work cafe here on I know a place!
 
+lang: en
+
 app_store_url: "https://apps.apple.com/app/id6747653382"
 baseurl: "" # the subpath of your site, e.g. /blog
-url: "" # the base hostname & protocol for your site, e.g. http://example.com
+url: "https://iknowaplace.app" # the base hostname & protocol for your site, e.g. http://example.com
+
+# Used by jekyll-seo-tag for OpenGraph/Twitter cards.
+logo: /assets/images/logo.png
+image: /assets/images/logo.png
 # twitter_username: jekyllrb
 # github_username:  jekyll
 
@@ -39,8 +45,11 @@ url: "" # the base hostname & protocol for your site, e.g. http://example.com
 # collections:
 #   posts:
 #     output: true
-# plugins:
-#   - jekyll-feed
+
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
+  - jekyll-seo-tag
 
 # Exclude from processing.
 # The following items will not be processed, by default.
