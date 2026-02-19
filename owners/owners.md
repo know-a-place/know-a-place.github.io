@@ -21,10 +21,6 @@ permalink: /owners/
       padding: 28px 28px 12px;
       border-bottom: 1px solid var(--border);
     }
-    h1 {
-      margin: 0 0 8px;
-      font-size: clamp(1.5rem, 2.2vw + 1rem, 2.1rem);
-    }
     .tagline {
       margin: 32px 0 0 0;
       color: var(--muted);

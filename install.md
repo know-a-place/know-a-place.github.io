@@ -13,7 +13,7 @@ permalink: /install/
   <p style="margin-top:1.25rem;">
     <strong>App Store link:</strong>
     <br />
-    <span style="opacity:0.85;">Add your App Store URL here when ready.</span>
+    <a href="{{ site.app_store_url }}" target="_blank" rel="noopener">{{ site.app_store_url }}</a>
   </p>
 
   {% if page.url contains '/install/' and page.from %}

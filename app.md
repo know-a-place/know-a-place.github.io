@@ -5,9 +5,11 @@ description: Redirect helper for universal links
 permalink: /app/
 ---
 
+
 <section class="page" style="max-width:820px;margin:4rem auto 5rem;padding:0 1.25rem;line-height:1.6;">
   <h1 style="font-size:clamp(2.0rem,4.5vw,2.6rem);line-height:1.1;margin:0 0 1rem;">Opening the app…</h1>
-  <p>If you’re not redirected automatically, <a href="/install/">install the app</a>.</p>
+	<p>If you already have the app installed, you should be redirected automatically in a moment.</p>
+	<p>If you’re not redirected, <a href="/install/">install the app</a> (or open this link on your phone).</p>
 </section>
 
 <script>

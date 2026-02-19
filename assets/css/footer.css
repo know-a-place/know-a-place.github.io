@@ -1,0 +1,60 @@
+/* Footer styles (used by _includes/footer.html) */
+
+/* Footer link styles: match document/nav link appearance */
+.site-footer .nav-link {
+	text-decoration: none;
+	font-size: .85rem;
+	font-weight: 500;
+	color: #374151;
+}
+
+.site-footer .nav-link:hover {
+	color: #111827;
+}
+
+.site-footer {
+	margin-top: 2.5rem;
+	padding: 3.25rem 1.5rem 3.5rem;
+	background: #fff;
+}
+
+.site-footer .footer-inner {
+	max-width: 1100px;
+	margin: 0 auto;
+	display: flex;
+	align-items: flex-start;
+	gap: 1rem;
+	position: relative;
+	padding-top: 1.25rem;
+	justify-content: flex-start;
+	padding-right: 1.25rem;
+}
+
+.site-footer .footer-inner:before {
+	content: "";
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 180px;
+	height: 1px;
+	background: rgba(0, 0, 0, 0.08);
+}
+
+.site-footer .footer-copy {
+	letter-spacing: .4px;
+}
+
+.site-footer .footer-links {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	gap: 12px;
+}
+
+@media (max-width: 640px) {
+	/* Make footer links wrap on very small screens */
+	.site-footer .footer-links {
+		flex-wrap: wrap;
+		gap: 8px;
+	}
+}

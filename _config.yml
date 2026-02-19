@@ -22,6 +22,8 @@ title: I know a place
 email: hi@iknowaplace.app
 description: >- # this means to ignore newlines until "baseurl:"
   Find your next co-work cafe here on I know a place!
+
+app_store_url: "https://apps.apple.com/app/id6747653382"
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "" # the base hostname & protocol for your site, e.g. http://example.com
 # twitter_username: jekyllrb
