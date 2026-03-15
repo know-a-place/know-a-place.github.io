@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Contact Us
+title: Contact Us - I know a place
 description: Get in touch with I know a place
 permalink: /contact/
 ---

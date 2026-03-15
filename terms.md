@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Terms & Conditions
+title: Terms & Conditions - I know a place
 permalink: /terms/
 ---
 

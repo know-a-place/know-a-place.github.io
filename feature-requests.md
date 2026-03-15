@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Feature Request
+title: Feature Request - I know a place
 permalink: /feature-requests/
 ---
 

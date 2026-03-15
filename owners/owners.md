@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Owners
+title: Owners - I know a place
 permalink: /owners/
 ---
 
@@ -16,10 +16,6 @@ permalink: /owners/
       border-radius: var(--radius);
       box-shadow: 0 10px 25px rgba(2, 6, 23, 0.06);
       overflow: hidden;
-    }
-    header {
-      padding: 28px 28px 12px;
-      border-bottom: 1px solid var(--border);
     }
     .tagline {
       margin: 32px 0 0 0;

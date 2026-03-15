@@ -1,5 +1,5 @@
 ---
-title: Privacy Policy
+title: Privacy Policy - I know a place
 description: Privacy policy for I know a place
 permalink: /privacy/
 css: assets/css/privacy.css

@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Install
+title: Install - I know a place
 description: Install I know a place
 permalink: /install/
 ---
