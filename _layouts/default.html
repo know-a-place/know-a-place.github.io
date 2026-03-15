@@ -6,11 +6,28 @@
 
   {% seo %}
 
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
+
 	<link rel="stylesheet" href="{{ '/assets/css/header.css' | relative_url }}" />
 	<link rel="stylesheet" href="{{ '/assets/css/footer.css' | relative_url }}" />
-  <link rel="stylesheet" href="{{ '/assets/css/landing.css' | relative_url }}" />
   {% if page.css %}
-    <link rel="stylesheet" href="{{ page.css | relative_url }}" />
+    {% assign css_json = page.css | jsonify %}
+    {% assign css_first_char = css_json | slice: 0, 1 %}
+    {% if css_first_char == '[' %}
+      {% for css_file in page.css %}
+        <link rel="stylesheet" href="{{ css_file | relative_url }}" />
+      {% endfor %}
+    {% else %}
+      {% assign css_files = page.css | split: ',' %}
+      {% for css_file in css_files %}
+        {% assign css_path = css_file | strip %}
+        {% if css_path != '' %}
+          <link rel="stylesheet" href="{{ css_path | relative_url }}" />
+        {% endif %}
+      {% endfor %}
+    {% endif %}
   {% endif %}
   <script defer src="{{ '/assets/js/site.js' | relative_url }}"></script>
     <!-- Favicons -->

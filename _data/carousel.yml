@@ -1,0 +1,53 @@
+# Carousel items for the landing page.
+# Each item maps an image to the cafe metadata shown on the slide.
+#
+# Fields:
+# - image: path to the image under /assets (string)
+# - name: cafe name (string)
+# - city: city where the cafe is based (string)
+# - slug: URL slug for the cafe (string)
+
+- image: /assets/images/carousel/NOC_sai_ying_pun.webp
+  name: NOC
+  city: Sai Ying Pun, Hong Kong
+  slug: sample-cafe-three
+
+- image: /assets/images/carousel/zin_cafe.webp
+  name: Zin Cafe
+  city: Canggu, Bali
+  slug: sample-cafe-one
+
+- image: /assets/images/carousel/zest_ubud.webp
+  name: Zest
+  city: Ubud, Bali
+  slug: sample-cafe-two
+
+- image: /assets/images/carousel/living_life.webp
+  name: Living Life Coffee & Eatery
+  city: Ubud, Bali
+  slug: sample-cafe-three
+
+- image: /assets/images/carousel/lungo.webp
+  name: Lungo
+  city: Cheung Sha Wan, Hong Kong
+  slug: sample-cafe-three
+
+- image: /assets/images/carousel/mowie.webp
+  name: Mowies Cafe
+  city: Berawa, Bali
+  slug: sample-cafe-three
+
+- image: /assets/images/carousel/home_cafe_mengwi.webp
+  name: Home Cafe
+  city: Mengwi, Bali
+  slug: sample-cafe-three
+
+- image: /assets/images/carousel/nude_canggu.webp
+  name: nüde cafe
+  city: Canggu, Bali
+  slug: sample-cafe-three
+
+- image: /assets/images/carousel/canteen_cafe.webp
+  name: Canteen Cafe
+  city: Canggu, Bali
+  slug: sample-cafe-three

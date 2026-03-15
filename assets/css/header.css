@@ -1,5 +1,14 @@
 /* Header / primary navigation styles (used by _includes/header.html) */
 
+/* Global typography */
+body {
+	font-family: "Inter", sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	font-family: "Poppins", sans-serif;
+}
+
 .site-header {
 	position: sticky;
 	top: 0;
@@ -32,7 +41,7 @@
 	height: 34px;
 	width: auto;
 	display: block;
-	transform: translateY(-2px);
+	transform: translateY(-6px);
 }
 
 .site-header .brand-name {
@@ -89,23 +98,28 @@
 	height: 40px;
 	padding: 0 14px;
 	border-radius: 10px;
-	background: #2563eb;
+	background: #0095FF;
 	color: #ffffff;
 	font-size: .9rem;
 	font-weight: 600;
 	text-decoration: none;
-	box-shadow: none;
+	box-shadow: 0 4px 0 rgba(0, 109, 186, 1);
 	transition: transform .15s ease, box-shadow .15s ease, background-color .15s ease;
 }
 
 .site-header .download-button:hover {
-	background: #1d4ed8;
-	transform: translateY(-1px);
-	box-shadow: none;
+	background: #1AA0FF;
+	transform: none;
+	box-shadow: 0 4px 0 rgba(0, 109, 186, 1);
+}
+
+.site-header .download-button:active {
+	transform: translateY(6px);
+	box-shadow: 0 0 0 rgba(0, 0, 0, 0);
 }
 
 .site-header .download-button:focus-visible {
-	outline: 3px solid rgba(37, 99, 235, 0.35);
+	outline: 3px solid rgba(0, 149, 255, 0.35);
 	outline-offset: 4px;
 }
 
@@ -197,7 +211,7 @@
 @media (max-width: 640px) {
 	/* Mobile header: flex layout so hamburger can sit at true far right */
 	.site-header .download-button {
-		display: none;
+		display: inline-flex;
 	}
 
 	.site-header .nav-inner {
