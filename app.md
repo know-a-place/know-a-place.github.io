@@ -1,20 +1,29 @@
 ---
-layout: default
-title: Opening the app…
-description: Redirect helper for universal links
-permalink: /app/
+layout: null
+permalink: /app/location
 ---
-
-
-<section class="page" style="max-width:820px;margin:4rem auto 5rem;padding:0 1.25rem;line-height:1.6;">
-  <h1 style="font-size:clamp(2.0rem,4.5vw,2.6rem);line-height:1.1;margin:0 0 1rem;">Opening the app…</h1>
-	<p>If you already have the app installed, you should be redirected automatically in a moment.</p>
-	<p>If you’re not redirected, <a href="/install/">install the app</a> (or open this link on your phone).</p>
-</section>
-
-<script>
-  (function () {
-    var from = window.location.pathname + (window.location.search || "") + (window.location.hash || "");
-    window.location.replace("/install/?from=" + encodeURIComponent(from));
-  })();
-</script>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>I know a place</title>
+  <meta name="description" content="Find your next co-work cafe on I know a place." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="{{ '/assets/css/app.css' | relative_url }}" />
+  <link rel="icon" type="image/png" sizes="32x32" href="{{ '/assets/favicons/favicon-32.png' | relative_url }}">
+  <link rel="apple-touch-icon" sizes="180x180" href="{{ '/assets/favicons/favicon-180.png' | relative_url }}">
+  <script>
+    window.__APP_STORE_URL__ = "{{ site.app_store_url }}";
+    window.__API_BASE_URL__  = "{{ site.api_base_url }}";
+  </script>
+  <script src="https://unpkg.com/react@18.3.1/umd/react.production.min.js" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" crossorigin="anonymous"></script>
+</head>
+<body>
+  <div id="root"></div>
+  <script type="text/babel" src="{{ '/assets/js/app.js' | relative_url }}" data-presets="react"></script>
+</body>
+</html>

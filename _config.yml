@@ -26,6 +26,7 @@ description: >- # this means to ignore newlines until "baseurl:"
 lang: en
 
 app_store_url: "https://apps.apple.com/app/id6747653382"
+api_base_url: "https://api.iknowaplace.app"
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://iknowaplace.app" # the base hostname & protocol for your site, e.g. http://example.com
 
@@ -74,6 +75,7 @@ plugins:
 # Include the hidden `.well-known` directory so verification files are copied.
 include:
   - .well-known
+  - _redirects
 
 # Exclude application-specific helper files that should not be publicly served.
 exclude:
