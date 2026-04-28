@@ -5,8 +5,8 @@ const APP_STORE_URL = window.__APP_STORE_URL__ || 'https://apps.apple.com/app/id
 const API_BASE      = window.__API_BASE_URL__  || '';
 
 // ── Design tokens ────────────────────────────────────────────
-const ACCENT      = 'oklch(0.68 0.13 25)';
-const ACCENT_SOFT = 'oklch(0.96 0.03 25)';   // eslint-disable-line no-unused-vars
+const ACCENT      = '#0095FF';
+const ACCENT_SOFT = 'rgba(0, 149, 255, 0.12)';   // eslint-disable-line no-unused-vars
 const INK         = 'oklch(0.22 0.01 80)';
 const INK_DIM     = 'oklch(0.50 0.01 80)';
 const INK_FAINT   = 'oklch(0.72 0.005 80)';
@@ -456,9 +456,9 @@ function StoreBadge({ label, disabled }) {
 
 function DesktopFrame({ children }) {
   return (
-    <div style={{ width: '100vw', height: '100vh', position: 'relative', overflow: 'hidden', background: 'oklch(0.30 0.04 60)', fontFamily: 'Inter, system-ui, sans-serif' }}>
+    <div style={{ width: '100vw', height: '100vh', position: 'relative', overflow: 'hidden', background: '#001b43', fontFamily: 'Inter, system-ui, sans-serif' }}>
       {/* Blurred bg */}
-      <div style={{ position: 'absolute', inset: '-40px', background: 'repeating-linear-gradient(135deg, oklch(0.45 0.05 50) 0 30px, oklch(0.55 0.06 60) 30px 60px), radial-gradient(at 30% 30%, oklch(0.65 0.08 40) 0%, transparent 50%)', filter: 'blur(80px) saturate(1.1)', opacity: 0.85 }} />
+      <div style={{ position: 'absolute', inset: '-40px', background: 'radial-gradient(at 20% 30%, rgba(0, 149, 255, 0.4) 0%, transparent 55%), radial-gradient(at 80% 70%, rgba(0, 60, 140, 0.55) 0%, transparent 55%)', filter: 'blur(80px)', opacity: 1 }} />
       <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(ellipse at center, transparent 30%, rgba(0,0,0,0.45) 100%)' }} />
 
       {/* Nav */}
@@ -466,7 +466,7 @@ function DesktopFrame({ children }) {
         <Logo color="white" size={15} />
         <div style={{ display: 'flex', gap: 10, alignItems: 'center' }}>
           <a href="/" style={{ fontSize: 12.5, color: 'rgba(255,255,255,0.75)', textDecoration: 'none' }}>Home</a>
-          <a href={APP_STORE_URL} style={{ padding: '7px 14px', borderRadius: 999, background: 'white', color: INK, fontSize: 12, fontWeight: 600, textDecoration: 'none' }}>Get the app</a>
+          <a href={APP_STORE_URL} style={{ padding: '7px 16px', borderRadius: 999, background: '#0095FF', color: '#fff', fontSize: 12, fontWeight: 600, textDecoration: 'none' }}>Get the app</a>
         </div>
       </div>
 
