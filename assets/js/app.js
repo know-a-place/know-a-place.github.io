@@ -427,13 +427,57 @@ function MobileCard({ data }) {
           <div style={{ border: `1px solid ${HAIR}`, borderRadius: 14, overflow: 'hidden', background: PAPER }}>
             <WifiRow hasWifi={has_wifi} />
             <FacilityRow icon="power" label="Power sockets" />
-            <FacilityRow icon="water" label="Self-serve water" last={false} />
+            <FacilityRow icon="water" label="Water refills" last={false} />
             <AppOnlyList items={APP_ONLY} />
           </div>
         </div>
       </div>
 
       <StickyCTA />
+    </div>
+  );
+}
+
+// ── Social sharing (desktop only) ───────────────────────────
+function SocialShare() {
+  const [copied, setCopied] = useState(false);
+  const url = window.location.href;
+
+  const copyLink = () => {
+    navigator.clipboard.writeText(url).then(() => {
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    });
+  };
+
+  const btn = {
+    width: 34, height: 34, borderRadius: '50%', flexShrink: 0,
+    background: 'rgba(255,255,255,0.10)', border: '1px solid rgba(255,255,255,0.18)',
+    display: 'flex', alignItems: 'center', justifyContent: 'center',
+    cursor: 'pointer', textDecoration: 'none',
+  };
+
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+      <div style={{ fontSize: 11, fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.5)' }}>Share this place</div>
+      <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
+        <a href="https://x.com/iknowaplaceapp" target="_blank" rel="noopener noreferrer" style={btn} title="X (Twitter)">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="white"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.743l7.738-8.835L1.254 2.25H8.08l4.253 5.622 5.91-5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+        </a>
+        <a href="https://www.instagram.com/iknowaplace.app/" target="_blank" rel="noopener noreferrer" style={btn} title="Instagram">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="white"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+        </a>
+        <a href="https://www.threads.com/@iknowaplace.app" target="_blank" rel="noopener noreferrer" style={btn} title="Threads">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="white"><path d="M12.186 24h-.007c-3.581-.024-6.334-1.205-8.184-3.509C2.35 18.44 1.5 15.586 1.472 12.01v-.017c.028-3.579.879-6.43 2.525-8.482C5.845 1.205 8.6.024 12.18 0h.014c2.746.02 5.043.725 6.826 2.098 1.677 1.29 2.858 3.13 3.509 5.467l-2.04.569c-1.104-3.96-3.898-5.984-8.304-6.015-2.91.022-5.11.936-6.54 2.717C4.307 6.504 3.616 8.914 3.589 12c.027 3.086.718 5.496 2.057 7.164 1.43 1.783 3.631 2.698 6.54 2.717 2.623-.02 4.358-.631 5.8-2.045 1.647-1.61 1.838-3.518 1.547-4.67-.239-.951-.882-1.79-1.868-2.434-.253 1.738-.86 3.023-1.812 3.82-1.102.925-2.564 1.384-4.341 1.367-1.53-.015-2.834-.493-3.772-1.383-.998-.947-1.502-2.258-1.457-3.682.047-1.42.677-2.657 1.77-3.488 1.05-.8 2.428-1.18 4.098-1.13.951.028 1.79.124 2.512.285-.096-.623-.305-1.105-.625-1.437-.427-.444-1.097-.67-1.99-.676h-.04c-.68 0-1.556.187-2.129.923l-1.653-1.218C9.302 6.145 10.595 5.6 12.168 5.59h.056c1.49.01 2.68.454 3.44 1.283.707.77 1.1 1.897 1.167 3.35.398.194.78.405 1.144.637 1.556.974 2.56 2.288 2.909 3.798.48 1.999.102 4.668-2.17 6.87C16.93 23.213 14.82 23.978 12.186 24zm-1.007-9.173c1.327.012 2.3-.355 2.893-.857.588-.498.97-1.33 1.133-2.47a16.52 16.52 0 0 0-2.719-.373c-1.058-.033-1.912.153-2.544.638-.576.44-.878 1.064-.901 1.85-.027.826.262 1.483.837 1.931.523.41 1.248.634 2.087.687l.214-.406z"/></svg>
+        </a>
+        <button onClick={copyLink} style={{ ...btn, border: copied ? '1px solid rgba(255,255,255,0.35)' : btn.border }} title="Copy link">
+          {copied
+            ? <svg width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M2.5 7.5L5.5 10.5L11.5 3.5" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
+            : <svg width="13" height="13" viewBox="0 0 14 14" fill="none"><rect x="4" y="4" width="8" height="8" rx="1.5" stroke="white" strokeWidth="1.3"/><path d="M2 10V2.5A.5.5 0 0 1 2.5 2H10" stroke="white" strokeWidth="1.3" strokeLinecap="round"/></svg>
+          }
+        </button>
+        {copied && <span style={{ fontSize: 11, color: 'rgba(255,255,255,0.65)' }}>Copied!</span>}
+      </div>
     </div>
   );
 }
@@ -454,7 +498,7 @@ function StoreBadge({ label, disabled }) {
   );
 }
 
-function DesktopFrame({ children }) {
+function DesktopFrame({ children, data }) {
   return (
     <div style={{ width: '100vw', height: '100vh', position: 'relative', overflow: 'hidden', background: '#001b43', fontFamily: 'Inter, system-ui, sans-serif' }}>
       {/* Blurred bg */}
@@ -477,7 +521,7 @@ function DesktopFrame({ children }) {
           <div style={{ position: 'relative', borderRadius: 38, overflow: 'hidden', width: 390, height: 780 }}>{children}</div>
         </div>
 
-        <div style={{ color: 'white', maxWidth: 320, display: 'flex', flexDirection: 'column', gap: 22 }}>
+        <div style={{ color: 'white', maxWidth: 320, display: 'flex', flexDirection: 'column', gap: 22, alignSelf: 'stretch', justifyContent: 'center', position: 'relative' }}>
           <div>
             <div style={{ fontSize: 11, fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.6)', marginBottom: 10 }}>Preview</div>
             <h2 style={{ margin: 0, fontSize: 34, fontWeight: 600, letterSpacing: '-0.025em', lineHeight: 1.1 }}>See the place in full, in the app</h2>
@@ -498,6 +542,7 @@ function DesktopFrame({ children }) {
             <StoreBadge label="App Store" />
             <StoreBadge label="Google Play — coming soon" disabled />
           </div>
+          {data && <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0 }}><SocialShare /></div>}
         </div>
       </div>
     </div>
@@ -545,7 +590,7 @@ function App() {
              : error      ? <ErrorCard message={error} />
              :               <MobileCard data={data} />;
 
-  if (isDesktop) return <DesktopFrame>{card}</DesktopFrame>;
+  if (isDesktop) return <DesktopFrame data={data}>{card}</DesktopFrame>;
   return (
     <div style={{ position: 'fixed', inset: 0, display: 'flex', flexDirection: 'column' }}>
       <DeeplinkBanner />
