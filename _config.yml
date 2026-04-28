@@ -75,8 +75,8 @@ plugins:
 # Include the hidden `.well-known` directory so verification files are copied.
 include:
   - .well-known
-  - _redirects
 
 # Exclude application-specific helper files that should not be publicly served.
 exclude:
   - .well-known/appspecific
+  - vendor/

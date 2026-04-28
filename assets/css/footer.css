@@ -12,6 +12,12 @@
 	color: #ffffff;
 }
 
+.site-footer .footer-link-meta {
+	margin-left: 0.35rem;
+	font-size: 0.75rem;
+	opacity: 0.5;
+}
+
 .site-footer {
 	margin-top: 2.5rem;
 	padding: 3.25rem 1.5rem 3.5rem;

@@ -1,6 +1,7 @@
 ---
 layout: null
 permalink: /app/location
+sitemap: false
 ---
 <html lang="en">
 <head>
@@ -8,6 +9,7 @@ permalink: /app/location
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>I know a place</title>
   <meta name="description" content="Find your next co-work cafe on I know a place." />
+  <meta name="robots" content="noindex, nofollow" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />

@@ -1,0 +1,55 @@
+name: Build and Deploy
+
+on:
+  push:
+    branches: [main]
+  schedule:
+    # Daily rebuild at 02:00 UTC to pick up any location changes
+    - cron: '0 2 * * *'
+  repository_dispatch:
+    # Triggered by the backend when a location is created or updated:
+    # POST https://api.github.com/repos/know-a-place/know-a-place.github.io/dispatches
+    # { "event_type": "location-updated" }
+    types: [location-updated]
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.3'
+          bundler-cache: true
+
+      - uses: actions/configure-pages@v5
+
+      - name: Generate location pages
+        run: ruby _scripts/generate_locations.rb
+
+      - name: Build site
+        run: bundle exec jekyll build --baseurl ""
+        env:
+          JEKYLL_ENV: production
+
+      - uses: actions/upload-pages-artifact@v3
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/deploy-pages@v4
+        id: deployment

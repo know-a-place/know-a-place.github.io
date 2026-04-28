@@ -1,9 +1,0 @@
-# redirects
-/feature-requests https://i-know-a-place.canny.io/feature-requests 301!
-/feature-requests/ https://i-know-a-place.canny.io/feature-requests 301!
-
-# Redirect /app to 404
-/app /404.html 404
-
-# Serve the app SPA for all location deep-links
-/app/location/* /app/location.html 200

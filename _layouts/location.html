@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+
+  {% assign loc = page.location %}
+
+  {% if loc.address_district and loc.address_district != '' %}
+    {% assign loc_place = loc.address_district | append: ', ' | append: loc.address_city %}
+  {% elsif loc.address_city and loc.address_city != '' %}
+    {% assign loc_place = loc.address_city %}
+  {% else %}
+    {% assign loc_place = '' %}
+  {% endif %}
+
+  {% if loc.images and loc.images.size > 0 %}
+    {% assign og_image = loc.images[0].url %}
+  {% else %}
+    {% assign og_image = site.url | append: '/assets/images/logo.png' %}
+  {% endif %}
+
+  {% if loc_place != '' %}
+    {% assign page_title = loc.name | append: ' — Work & Study Cafe in ' | append: loc_place | append: ' | I know a place' %}
+    {% assign page_desc = 'Work or study at ' | append: loc.name | append: ' in ' | append: loc_place | append: '. Check WiFi availability, power sockets, and more on I know a place.' %}
+  {% else %}
+    {% assign page_title = loc.name | append: ' — Work & Study Cafe | I know a place' %}
+    {% assign page_desc = 'Work or study at ' | append: loc.name | append: '. Check WiFi availability, power sockets, and more on I know a place.' %}
+  {% endif %}
+
+  <title>{{ page_title }}</title>
+  <meta name="description" content="{{ page_desc }}" />
+  <link rel="canonical" href="{{ site.url }}/app/location/{{ loc.slug }}/" />
+
+  <!-- Open Graph -->
+  <meta property="og:type"        content="website" />
+  <meta property="og:title"       content="{{ page_title }}" />
+  <meta property="og:description" content="{{ page_desc }}" />
+  <meta property="og:url"         content="{{ site.url }}/app/location/{{ loc.slug }}/" />
+  <meta property="og:site_name"   content="I know a place" />
+  <meta property="og:image"       content="{{ og_image }}" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card"        content="summary_large_image" />
+  <meta name="twitter:title"       content="{{ page_title }}" />
+  <meta name="twitter:description" content="{{ page_desc }}" />
+  <meta name="twitter:image"       content="{{ og_image }}" />
+
+  <!-- Apple Smart App Banner (Safari only — non-Safari iOS gets the in-app banner) -->
+  <meta name="apple-itunes-app" content="app-id=6747653382, app-argument=https://iknowaplace.app/app/location/{{ loc.slug }}" />
+
+  <!-- JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "CafeOrCoffeeShop",
+    "name": {{ loc.name | jsonify }},
+    "url": "{{ site.url }}/app/location/{{ loc.slug }}/",
+    "image": {{ og_image | jsonify }},
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": {{ loc.address_city | jsonify }},
+      "addressRegion": {{ loc.address_district | jsonify }}
+    },
+    "amenityFeature": [
+      {
+        "@type": "LocationFeatureSpecification",
+        "name": "WiFi",
+        "value": {% if loc.has_wifi %}true{% else %}false{% endif %}
+      }
+    ]
+  }
+  </script>
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/png" sizes="32x32" href="{{ '/assets/favicons/favicon-32.png' | relative_url }}">
+  <link rel="apple-touch-icon" sizes="180x180" href="{{ '/assets/favicons/favicon-180.png' | relative_url }}">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="{{ '/assets/css/app.css' | relative_url }}" />
+
+  <script>
+    window.__APP_STORE_URL__ = "{{ site.app_store_url }}";
+    window.__API_BASE_URL__  = "{{ site.api_base_url }}";
+  </script>
+
+  <script src="https://unpkg.com/react@18.3.1/umd/react.production.min.js" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" crossorigin="anonymous"></script>
+</head>
+<body>
+  <div id="root"></div>
+  <script type="text/babel" src="{{ '/assets/js/app.js' | relative_url }}" data-presets="react"></script>
+</body>
+</html>

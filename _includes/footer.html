@@ -1,6 +1,24 @@
 <footer class="site-footer">
 	<div class="footer-inner">
 		<div class="footer-top" aria-label="Footer navigation">
+			{% if site.data.locations and site.data.locations.size > 0 %}
+			<div class="footer-section" aria-label="Featured places">
+				<h3 class="footer-section-title">Featured places</h3>
+				<div class="footer-links">
+					{% for location in site.data.locations limit:4 %}
+						{% if location.slug and location.slug != '' %}
+						<a href="/app/location/{{ location.slug }}/" class="nav-link">
+							{{- location.name -}}
+							{% if location.address_city and location.address_city != '' %}
+							<span class="footer-link-meta">{{ location.address_city }}</span>
+							{% endif %}
+						</a>
+						{% endif %}
+					{% endfor %}
+				</div>
+			</div>
+			{% endif %}
+
 			<div class="footer-section" aria-label="About">
 				<h3 class="footer-section-title">About</h3>
 				<div class="footer-links">

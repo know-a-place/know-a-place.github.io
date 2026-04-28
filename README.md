@@ -26,6 +26,39 @@ The dev server starts at `http://127.0.0.1:4000`. Built output goes to `_site/`.
 
 ---
 
+## Deployment
+
+The site is deployed to GitHub Pages via **GitHub Actions** ([.github/workflows/deploy.yml](.github/workflows/deploy.yml)).
+This is required because the site uses a custom Jekyll plugin (`_plugins/fetch_locations.rb`)
+which GitHub Pages' built-in Jekyll does not support.
+
+The workflow runs on:
+- Every push to `main`
+- A daily schedule at 02:00 UTC (picks up any location data changes)
+- A `repository_dispatch` webhook event of type `location-updated`
+
+### One-time setup
+
+In the GitHub repo **Settings → Pages**, set **Source** to **GitHub Actions**
+(not the default "Deploy from a branch").
+
+### Triggering a rebuild from the backend
+
+When a location is created or updated, the backend should POST to the GitHub
+API to trigger an immediate rebuild:
+
+```
+POST https://api.github.com/repos/know-a-place/know-a-place.github.io/dispatches
+Authorization: Bearer <GITHUB_PAT>
+Content-Type: application/json
+
+{ "event_type": "location-updated" }
+```
+
+The PAT needs `repo` scope (or `actions: write` on a fine-grained token).
+
+---
+
 ## How pages are generated
 
 The site is a standard Jekyll static site. Each page is a Markdown (`.md`) file
@@ -52,7 +85,28 @@ in [_config.yml](_config.yml) and are available in templates as `{{ site.<key> }
 The landing-page carousel is data-driven: slide content comes from
 [_data/carousel.yml](_data/carousel.yml) and is iterated with `{% for item in site.data.carousel %}`.
 
-Jekyll plugins used: `jekyll-feed`, `jekyll-sitemap`, `jekyll-seo-tag`.
+Jekyll plugins used: `jekyll-feed`, `jekyll-sitemap`, `jekyll-seo-tag`, plus the
+custom `_plugins/fetch_locations.rb` (see below).
+
+### Location pages (`/app/location/[slug]`)
+
+[`_plugins/fetch_locations.rb`](_plugins/fetch_locations.rb) runs at build time,
+calls `GET /api/v1/locations/webapp` on the production API, and generates a static
+HTML page for every location at `/app/location/[slug]/`.
+
+Each generated page uses [`_layouts/location.html`](_layouts/location.html), which
+provides full SEO metadata (unique title, description, Open Graph tags, Twitter
+Card, and `CafeOrCoffeeShop` JSON-LD structured data), then mounts the same React
+app as `app.md` for interactive functionality.
+
+If the API is unreachable at build time the plugin logs a warning and skips page
+generation — the build completes and the rest of the site is unaffected.
+
+**Fallback for slugs not yet built:** [404.html](404.html) catches any unmatched
+`/app/location/[slug]` path and redirects the browser to `/app/location?slug=[slug]`,
+which the React SPA handles via query parameter. This means a location added
+minutes before the next rebuild still works — it just skips the pre-rendered SEO
+page until the next build.
 
 ---
 
