@@ -276,14 +276,42 @@ function AppOnlyList({ items }) {
   );
 }
 
+// ── Non-Safari iOS deep-link banner ─────────────────────────
+const isIOS       = /iPad|iPhone|iPod/.test(navigator.userAgent);
+const isSafari    = /Safari/.test(navigator.userAgent) && !/CriOS|FxiOS|OPiOS|EdgiOS|Chrome/.test(navigator.userAgent);
+const needsBanner = isIOS && !isSafari;
+
+function DeeplinkBanner() {
+  const [dismissed, setDismissed] = useState(false);
+  if (!needsBanner || dismissed) return null;
+
+  const m    = window.location.pathname.match(/\/app\/location\/([^\/]+)/);
+  const slug = m ? m[1] : null;
+  if (!slug) return null;
+
+  return (
+    <div style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '10px 14px', background: PAPER_2, borderBottom: `1px solid ${HAIR}`, flexShrink: 0 }}>
+      <div style={{ width: 40, height: 40, borderRadius: 10, background: INK, flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <Logo size={10} color={PAPER} />
+      </div>
+      <div style={{ flex: 1, minWidth: 0 }}>
+        <div style={{ fontSize: 13, fontWeight: 600, color: INK, letterSpacing: '-0.01em' }}>I know a place</div>
+        <div style={{ fontSize: 11, color: INK_DIM, marginTop: 1 }}>Free · Open for the full experience</div>
+      </div>
+      <a href={'iknowaplace://location/' + slug} style={{ padding: '7px 14px', borderRadius: 999, background: ACCENT, color: PAPER, border: 'none', fontSize: 12, fontWeight: 600, cursor: 'pointer', whiteSpace: 'nowrap', flexShrink: 0, textDecoration: 'none' }}>Open</a>
+      <button onClick={() => setDismissed(true)} style={{ background: 'none', border: 'none', color: INK_DIM, cursor: 'pointer', fontSize: 18, padding: '0 2px', lineHeight: 1, flexShrink: 0 }}>×</button>
+    </div>
+  );
+}
+
 // ── Top-bar buttons ──────────────────────────────────────────
-function CircleBtn({ ico, locked }) {
+function CircleBtn({ ico, locked, onClick }) {
   const paths = {
     share:    <><path d="M12 4v10" stroke="white" strokeWidth="1.5" strokeLinecap="round"/><path d="M8 7l4-4 4 4" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/><path d="M5 11v7h14v-7" stroke="white" strokeWidth="1.5" strokeLinecap="round"/></>,
     bookmark: <path d="M7 4h10v16l-5-4-5 4z" stroke="white" strokeWidth="1.5" strokeLinejoin="round" fill="none"/>,
   };
   return (
-    <button style={{ width: 34, height: 34, borderRadius: '50%', border: 'none', background: 'rgba(0,0,0,0.32)', backdropFilter: 'blur(8px)', WebkitBackdropFilter: 'blur(8px)', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', position: 'relative' }}>
+    <button onClick={onClick} style={{ width: 34, height: 34, borderRadius: '50%', border: 'none', background: 'rgba(0,0,0,0.32)', backdropFilter: 'blur(8px)', WebkitBackdropFilter: 'blur(8px)', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', position: 'relative' }}>
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none">{paths[ico]}</svg>
       {locked && (
         <span style={{ position: 'absolute', bottom: -2, right: -2, width: 14, height: 14, borderRadius: '50%', background: PAPER, display: 'flex', alignItems: 'center', justifyContent: 'center', border: `1px solid ${HAIR}` }}>
@@ -359,13 +387,22 @@ function MobileCard({ data }) {
   const { name, address_district, address_city, status, has_wifi, images = [] } = data;
   const statusLabel = status && status.label ? status.label : (status && status.is_open ? 'Open' : 'Closed');
 
+  const handleShare = () => {
+    const url = window.location.href;
+    if (navigator.share) {
+      navigator.share({ title: name, url });
+    } else {
+      navigator.clipboard.writeText(url);
+    }
+  };
+
   return (
     <div style={{ width: '100%', height: '100%', background: PAPER, color: INK, fontFamily: 'Inter, system-ui, sans-serif', fontSize: 14, display: 'flex', flexDirection: 'column', position: 'relative', overflow: 'hidden' }}>
       {/* Top bar */}
       <div style={{ position: 'absolute', top: 0, left: 0, right: 0, zIndex: 5, padding: '14px 16px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: 'linear-gradient(180deg, rgba(0,0,0,0.35), transparent)' }}>
         <Logo color="white" size={13} />
         <div style={{ display: 'flex', gap: 8 }}>
-          <CircleBtn ico="share" />
+          <CircleBtn ico="share" onClick={handleShare} />
           <CircleBtn ico="bookmark" locked />
         </div>
       </div>
@@ -510,8 +547,11 @@ function App() {
 
   if (isDesktop) return <DesktopFrame>{card}</DesktopFrame>;
   return (
-    <div style={{ position: 'fixed', inset: 0 }}>
-      {card}
+    <div style={{ position: 'fixed', inset: 0, display: 'flex', flexDirection: 'column' }}>
+      <DeeplinkBanner />
+      <div style={{ flex: 1, minHeight: 0, overflow: 'hidden' }}>
+        {card}
+      </div>
     </div>
   );
 }

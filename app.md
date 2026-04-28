@@ -18,6 +18,18 @@ permalink: /app/location
     window.__APP_STORE_URL__ = "{{ site.app_store_url }}";
     window.__API_BASE_URL__  = "{{ site.api_base_url }}";
   </script>
+  <script>
+    (function() {
+      var m = window.location.pathname.match(/\/app\/location\/([^\/]+)/);
+      var slug = m ? m[1] : new URLSearchParams(window.location.search).get('slug');
+      if (slug) {
+        var meta = document.createElement('meta');
+        meta.name = 'apple-itunes-app';
+        meta.content = 'app-id=6747653382, app-argument=https://iknowaplace.app/app/location/' + slug;
+        document.head.appendChild(meta);
+      }
+    })();
+  </script>
   <script src="https://unpkg.com/react@18.3.1/umd/react.production.min.js" crossorigin="anonymous"></script>
   <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js" crossorigin="anonymous"></script>
   <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" crossorigin="anonymous"></script>

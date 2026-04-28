@@ -1,0 +1,6 @@
+# Local overrides for development. Values here take precedence over _config.yml
+# because Jekyll merges configs left-to-right when passed as a comma-separated list
+# (e.g. --config _config.yml,_config.local.yml). Only keys listed here are overridden;
+# everything else in _config.yml remains unchanged.
+
+api_base_url: "http://localhost:8080"

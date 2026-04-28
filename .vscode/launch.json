@@ -1,0 +1,13 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Jekyll Serve (local)",
+      "type": "node",
+      "request": "launch",
+      "runtimeExecutable": "bundle",
+      "runtimeArgs": ["exec", "jekyll", "serve", "--port", "4099", "--config", "_config.yml,_config.local.yml", "--livereload"],
+      "console": "integratedTerminal"
+    }
+  ]
+}
