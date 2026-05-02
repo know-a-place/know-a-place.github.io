@@ -83,7 +83,56 @@
 
   <link rel="stylesheet" href="{{ '/assets/css/app.css' | relative_url }}" />
   <link rel="stylesheet" href="{{ '/assets/css/footer.css' | relative_url }}" />
-  <style>.site-footer { margin-top: 0; }</style>
+  <style>
+    .loc-static {
+      width: 100%;
+      min-height: 100vh;
+      align-self: flex-start;
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 28px 20px 48px;
+      font-size: 15px;
+      line-height: 1.65;
+      color: oklch(0.22 0.01 80);
+    }
+    .loc-static h1 {
+      margin: 0 0 4px;
+      font-size: 26px;
+      font-weight: 700;
+      letter-spacing: -0.025em;
+    }
+    .loc-static .loc-place {
+      margin: 0 0 20px;
+      font-size: 13px;
+      color: oklch(0.50 0.01 80);
+    }
+    .loc-static .loc-hero {
+      margin: 0 -20px 24px;
+      aspect-ratio: 4 / 3;
+      overflow: hidden;
+      background: oklch(0.93 0.005 80);
+    }
+    .loc-static .loc-hero img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .loc-static p { margin: 0 0 14px; }
+    .loc-static ul {
+      margin: 4px 0 18px;
+      padding: 0 0 0 20px;
+    }
+    .loc-static ul li { margin-bottom: 5px; }
+    .loc-static .loc-back {
+      display: inline-block;
+      margin-top: 8px;
+      font-size: 13px;
+      color: oklch(0.45 0.12 250);
+      text-decoration: none;
+    }
+    .site-footer { margin-top: 0; }
+  </style>
 
   <script>
     window.__APP_STORE_URL__ = "{{ site.app_store_url }}";
@@ -96,11 +145,38 @@
 </head>
 <body>
   <div id="root">
-    <div style="padding:14px 18px 0;font-family:Inter,system-ui,sans-serif;color:oklch(0.22 0.01 80);background:oklch(0.99 0.003 80);min-height:100vh;">
-      <h1 style="margin:0;font-size:22px;font-weight:600;letter-spacing:-0.02em;">{{ loc.name }}</h1>
-      {% if loc_place != '' %}<p style="margin:4px 0 0;font-size:12px;color:oklch(0.50 0.01 80);">{{ loc_place }}</p>{% endif %}
-      <p style="margin:12px 0 0;font-size:14px;line-height:1.5;">{{ page_desc }}</p>
-      <p style="margin:16px 0 0;font-size:13px;"><a href="/">&#8592; Discover more cafes on I know a place</a></p>
+    <div class="loc-static">
+      <h1>{{ loc.name }}</h1>
+      {% if loc_place != '' %}<p class="loc-place">{{ loc_place }}</p>{% endif %}
+
+      {% if loc.images.size > 0 %}
+      <div class="loc-hero">
+        <img src="{{ loc.images[0].url }}"
+             alt="Photo of {{ loc.name }}, a work-friendly cafe in {{ loc_place }}"
+             width="{{ loc.images[0].width }}"
+             height="{{ loc.images[0].height }}"
+             loading="eager" />
+      </div>
+      {% endif %}
+
+      {% assign img_labels = '' %}
+      {% for img in loc.images %}{% assign img_labels = img_labels | append: img.label | append: ' ' %}{% endfor %}
+
+      <p>{{ loc.name }} is a cafe in {{ loc_place }} verified by the I know a place community as a reliable spot for remote work and studying. {% if loc.has_wifi %}WiFi is confirmed available — a solid foundation for video calls, uploads, and long focused sessions.{% else %}WiFi availability hasn't been confirmed here, making it well-suited for focused offline work.{% endif %}</p>
+
+      <p>{% if loc.images.size > 0 %}The community has contributed {{ loc.images.size }} {% if loc.images.size == 1 %}verified photo{% else %}verified photos{% endif %} of this location{% if img_labels contains 'DESK' %}, including workspace shots so you can check the desk setup before you arrive{% endif %}{% if img_labels contains 'FOOD' %}, food options available on site{% endif %}{% if img_labels contains 'AMENITY' %}, and verified amenity details including power socket locations{% endif %}.{% if img_labels contains 'INTERIOR' %} Interior shots are included so you know exactly what the space looks like.{% endif %}{% endif %}</p>
+
+      <p>{% if loc.address_district and loc.address_district != '' %}Nestled in {{ loc.address_district }}, {{ loc.address_city }}{% else %}Located in {{ loc.address_city }}{% endif %}, {{ loc.name }} is one of the hand-picked spots on I know a place — a community-driven guide built for remote workers and students. Download the app to check real-time open status, community-sourced WiFi speed test results, power socket availability, and the full details list before making the trip.</p>
+
+      <ul>
+        <li>WiFi: {% if loc.has_wifi %}Confirmed available{% else %}Not yet confirmed{% endif %}</li>
+        {% if img_labels contains 'DESK' %}<li>Workspace photos available</li>{% endif %}
+        {% if img_labels contains 'FOOD' %}<li>Food options documented</li>{% endif %}
+        {% if img_labels contains 'AMENITY' %}<li>Amenities verified</li>{% endif %}
+        {% if img_labels contains 'INTERIOR' %}<li>Interior photos available</li>{% endif %}
+      </ul>
+
+      <a href="/" class="loc-back">&#8592; Discover more cafes on I know a place</a>
     </div>
   </div>
   <script type="text/babel" src="{{ '/assets/js/app.js' | relative_url }}" data-presets="react"></script>
