@@ -1,0 +1,33 @@
+---
+layout: location_index
+title: Co-work & study cafes in Bali — I know a place
+description: "Browse all co-work and study cafes in Bali listed on I know a place. Find spots with WiFi, power sockets, and more."
+permalink: /app/locations/bali/
+---
+
+<div class="location-index">
+  <a href="/app/locations/" class="back">&#8592; All cities</a>
+
+  <h1>Co-work &amp; study cafes in Bali</h1>
+  <p class="desc">All Bali cafes listed on I know a place.</p>
+
+  <nav>
+    <a href="/app/locations/hong-kong/">Hong Kong</a>
+    <a href="/app/locations/ho-chi-minh-city/">Ho Chi Minh City</a>
+    <a href="/app/locations/shanghai/">Shanghai</a>
+  </nav>
+
+  {% assign city_locations = site.data.locations | where: "address_city", "Bali" %}
+  {% if city_locations.size > 0 %}
+  <ul>
+    {% for loc in city_locations %}
+      {% if loc.slug and loc.slug != '' %}
+    <li>
+      <a href="/app/location/{{ loc.slug }}/">{{ loc.name }}</a>
+      {% if loc.address_district and loc.address_district != '' %}<span class="district"> — {{ loc.address_district }}</span>{% endif %}
+    </li>
+      {% endif %}
+    {% endfor %}
+  </ul>
+  {% endif %}
+</div>

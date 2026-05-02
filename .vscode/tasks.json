@@ -1,0 +1,18 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Generate locations data",
+      "type": "shell",
+      "command": "export PATH=\"$HOME/.rbenv/bin:$HOME/.rbenv/shims:$PATH\" && eval \"$(rbenv init -)\" && bundle exec ruby _scripts/generate_locations.rb",
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared"
+      },
+      "problemMatcher": []
+    }
+  ]
+}

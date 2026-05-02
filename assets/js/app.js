@@ -187,7 +187,7 @@ function HeroCarousel({ images = [] }) {
         background: 'rgba(0,0,0,0.45)', backdropFilter: 'blur(8px)', WebkitBackdropFilter: 'blur(8px)',
         color: 'white', fontSize: 11, fontWeight: 500, letterSpacing: '0.02em',
       }}>
-        {idx < photoCount ? `${idx + 1} / ${photoCount}` : '+5 more in app'}
+        {idx < photoCount ? `${idx + 1} / ${photoCount}` : 'more in app'}
       </div>
     </div>
   );
@@ -201,7 +201,7 @@ function CarouselGetAppPanel({ onBack }) {
         <span style={{ width: 36, height: 36, borderRadius: 10, background: 'rgba(255,255,255,0.12)', border: '1px solid rgba(255,255,255,0.18)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
           <LockIcon size={14} color={PAPER} />
         </span>
-        <div style={{ fontSize: 15, fontWeight: 600, letterSpacing: '-0.01em' }}>5 more photos in the app</div>
+        <div style={{ fontSize: 15, fontWeight: 600, letterSpacing: '-0.01em' }}>More photos in the app</div>
         <div style={{ fontSize: 11.5, color: 'rgba(255,255,255,0.7)', maxWidth: 240, lineHeight: 1.45 }}>
           See the full set of cafe photos, plus shots from other regulars.
         </div>

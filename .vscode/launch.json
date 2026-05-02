@@ -7,7 +7,8 @@
       "request": "launch",
       "runtimeExecutable": "bundle",
       "runtimeArgs": ["exec", "jekyll", "serve", "--port", "4099", "--config", "_config.yml,_config.local.yml", "--livereload"],
-      "console": "integratedTerminal"
+      "console": "integratedTerminal",
+      "preLaunchTask": "Generate locations data"
     }
   ]
 }

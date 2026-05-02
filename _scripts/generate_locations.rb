@@ -10,7 +10,8 @@ require 'uri'
 require 'fileutils'
 require 'yaml'
 
-API_BASE = ENV.fetch('API_BASE_URL', 'https://api.iknowaplace.app')
+_config  = YAML.safe_load(File.read('_config.yml')) rescue {}
+API_BASE = ENV.fetch('API_BASE_URL', _config['api_base_url'] || 'https://api.iknowaplace.app')
 
 uri      = URI("#{API_BASE}/api/v1/locations/webapp")
 http     = Net::HTTP.new(uri.host, uri.port)
