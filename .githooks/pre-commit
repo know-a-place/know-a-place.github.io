@@ -1,0 +1,36 @@
+#!/usr/bin/env ruby
+# Auto-updates last_modified_at in front matter for staged static pages.
+# Install once: git config core.hooksPath .githooks
+
+require 'date'
+
+today = Date.today.to_s
+
+staged = `git diff --cached --name-only --diff-filter=ACM`.split("\n").select do |f|
+  f.match?(/\.(md|html)$/) && !f.start_with?('app/location/', 'app/locations/', '_site/')
+end
+
+staged.each do |file|
+  next unless File.exist?(file)
+
+  content = File.read(file)
+  next unless content.start_with?('---') && content.match?(/^last_modified_at:/)
+
+  # Only update the date when something other than last_modified_at itself changed.
+  # This prevents the hook from firing when the field is first added or when only
+  # the date is being corrected manually.
+  diff_lines = `git diff --cached -- #{file}`.lines
+  meaningful_changes = diff_lines.select do |line|
+    (line.start_with?('+') || line.start_with?('-')) &&
+      !line.start_with?('+++', '---') &&
+      !line.match?(/^[+-]last_modified_at:/)
+  end
+  next if meaningful_changes.empty?
+
+  updated = content.sub(/^last_modified_at:.*$/, "last_modified_at: #{today}")
+  next if updated == content
+
+  File.write(file, updated)
+  system('git', 'add', file)
+  puts "pre-commit: updated last_modified_at in #{file}"
+end

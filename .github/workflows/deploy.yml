@@ -34,6 +34,14 @@ jobs:
 
       - uses: actions/configure-pages@v5
 
+      - name: Restore location pages cache
+        uses: actions/cache@v4
+        with:
+          path: app/location
+          key: location-pages-${{ github.run_id }}
+          restore-keys: |
+            location-pages-
+
       - name: Generate location pages
         run: ruby _scripts/generate_locations.rb
 

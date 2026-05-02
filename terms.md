@@ -2,6 +2,7 @@
 layout: default
 title: Terms & Conditions - I know a place
 permalink: /terms/
+last_modified_at: 2026-05-02
 css: /assets/css/prose.css
 ---
 

@@ -1,0 +1,16 @@
+---
+layout: null
+permalink: /sitemap.xml
+---
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  {%- for page in site.pages -%}
+    {%- assign last_char = page.url | slice: -1 -%}
+    {%- if last_char == '/' and page.sitemap != false -%}
+    <url>
+      <loc>{{ site.url }}{{ page.url }}</loc>
+      <lastmod>{{ page.last_modified_at | default: page.date | default: site.time | date_to_xmlschema }}</lastmod>
+    </url>
+    {%- endif -%}
+  {%- endfor -%}
+</urlset>

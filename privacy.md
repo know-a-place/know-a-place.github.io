@@ -3,6 +3,7 @@ layout: default
 title: Privacy Policy - I know a place
 description: Privacy policy for I know a place
 permalink: /privacy/
+last_modified_at: 2026-05-02
 css: /assets/css/prose.css
 ---
 

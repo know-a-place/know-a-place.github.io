@@ -3,6 +3,7 @@ layout: default
 title: I know a place - Find Remote Work Cafes & Study Spots
 description: Find the perfect laptop-friendly cafes for remote work and studying. Discover spots with fast WiFi, power sockets, and great coffee on I know a place.
 permalink: /
+last_modified_at: 2026-05-02
 css: assets/css/landing.css, assets/css/carousel.css
 ---
 

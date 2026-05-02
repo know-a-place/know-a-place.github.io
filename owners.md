@@ -2,6 +2,7 @@
 layout: default
 title: For Owners - I know a place
 permalink: /owners/
+last_modified_at: 2026-05-02
 css: /assets/css/prose.css
 ---
 

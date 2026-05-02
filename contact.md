@@ -3,6 +3,7 @@ layout: default
 title: Contact - I know a place
 description: Get in touch with I know a place
 permalink: /contact/
+last_modified_at: 2026-05-02
 css: /assets/css/prose.css
 ---
 
